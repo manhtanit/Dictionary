@@ -3,23 +3,23 @@ import org.omg.Messaging.SYNC_WITH_TRANSPORT;
 
 public class DictionaryCommandline {
 
-
     public static void main(String[] args) {
 
         DictionaryCommandline test = new DictionaryCommandline();
-
-        test.showAllWorlds();
+        test.engDic.insertFromFile();
+        test.dictionaryAdvanced();
     }
 
-    public void dictionaryBasic() {
+    private DictionaryManagement engDic = new DictionaryManagement();
 
+    public void dictionaryBasic() {
+        engDic.insertFromCommandline();
+        showAllWorlds();
     }
 
     public void showAllWorlds() {
         int i = 0;
-        Dictionary engDic = new Dictionary();
-        engDic.loadDictionary();
-        for (String c: engDic.dic.keySet()) {
+        for (String c: engDic.dictionary1.dic.keySet()) {
             String temp = Integer.toString(i++);
             while (temp.length() < 6) {
                 temp = " " + temp;
@@ -30,7 +30,7 @@ public class DictionaryCommandline {
             }
 
             System.out.print(temp + target + "    " );
-            String temp2 = engDic.dic.get(c);
+            String temp2 = engDic.dictionary1.dic.get(c);
             temp2 = temp2.replaceAll("\n","");
             int k = 0;
             int check = 0;
@@ -51,5 +51,10 @@ public class DictionaryCommandline {
             System.out.println("");
 
         }
+    }
+    public void dictionaryAdvanced() {
+        engDic.insertFromFile();
+        showAllWorlds();
+        engDic.dictionaryLookup();
     }
 }
