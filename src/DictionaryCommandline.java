@@ -3,15 +3,11 @@ import java.util.ArrayList;
 
 public class DictionaryCommandline {
 
-    public static void main(String[] args) {
-
-        DictionaryCommandline test = new DictionaryCommandline();
-        test.engDic.insertFromFile();
-        test.dictionaryAdvanced();
-    }
-
     private DictionaryManagement engDic = new DictionaryManagement();
 
+    public DictionaryCommandline() {
+        engDic.insertFromFile();
+    }
     public void dictionaryBasic() {
         engDic.insertFromCommandline();
         showAllWorlds();
@@ -84,4 +80,23 @@ public class DictionaryCommandline {
             System.out.println(c);
         }
     }
+    public ArrayList<String>  dictionaryHintFromSearch(String s) {
+        boolean check = false;
+        boolean found = false;
+        ArrayList<String> hintWords = new ArrayList<String>();
+        for (String c: engDic.dictionary1.dic.keySet()) {
+            if (c.startsWith(s)) {
+                hintWords.add(c);
+                check = true;
+                found = true;
+            } else {
+                check = false;
+            }
+            if (found&&!check) {
+                break;
+            }
+        }
+        return hintWords;
+    }
+
 }
