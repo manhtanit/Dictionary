@@ -1,8 +1,6 @@
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.util.Scanner;
 import java.io.File;
-import java.io.PrintWriter;
 
 public class DictionaryManagement {
 
@@ -17,9 +15,9 @@ public class DictionaryManagement {
         String rong = scannerWord.nextLine();
         for (int i = 0; i < n; i++) {
             Word newWord = new Word();
-            newWord.word_target = scannerWord.nextLine();
-            newWord.word_explain = scannerWord.nextLine();
-            dictionary1.dic.put(newWord.word_target, newWord.word_explain);
+            newWord.setWord_target(scannerWord.nextLine());
+            newWord.setWord_explain(scannerWord.nextLine());
+            dictionary1.dic.put(newWord.getWord_target(), newWord.getWord_explain());
         }
         scannerWord.close();
     }
@@ -27,9 +25,13 @@ public class DictionaryManagement {
     public void insertFromFile() {
 
         try {
-            File myObj = new File("dicfile.txt");
-            Scanner scanner = new Scanner(myObj);
-            if (myObj.exists()) {
+            InputStream stream = Dictionary.class.getResourceAsStream("/dicfile.txt");
+            if (stream == null) {
+                System.out.println("Resource not located.");
+            }
+            //File myObj = new File("dicfile.jar");
+            Scanner scanner = new Scanner(stream,"utf-8");
+            if (stream != null) {
                 String key = "";
                 String value = "";
                 int i = 0;
@@ -57,7 +59,7 @@ public class DictionaryManagement {
                 System.out.println("Cannot open file!");
             }
             scanner.close();
-        } catch (FileNotFoundException e) {
+        } catch (Exception e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
@@ -79,18 +81,18 @@ public class DictionaryManagement {
 
     public void addWord(Word word) {
 
-        dictionary1.dic.put(word.word_target,word.word_explain);
+        dictionary1.dic.put(word.getWord_target(),word.getWord_explain());
     }
     public void removeWord(Word word) {
 
-        if (dictionary1.dic.containsKey(word.word_target)) {
-            dictionary1.dic.remove(word.word_target);
+        if (dictionary1.dic.containsKey(word.getWord_target())) {
+            dictionary1.dic.remove(word.getWord_explain());
         }
     }
     public void replaceWord(Word word) {
 
-        if (dictionary1.dic.containsKey(word.word_target)) {
-            dictionary1.dic.replace(word.word_target, word.word_explain);
+        if (dictionary1.dic.containsKey(word.getWord_target())) {
+            dictionary1.dic.replace(word.getWord_target(), word.getWord_explain());
         }
     }
 

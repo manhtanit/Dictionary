@@ -1,0 +1,11 @@
+<component name="ArtifactManager">
+  <artifact type="apk" name="Dictionary">
+    <output-path>$PROJECT_DIR$</output-path>
+    <properties id="android-properties">
+      <options>
+        <option name="keyStoreUrl" value="file://" />
+      </options>
+    </properties>
+    <root id="archive" name="Dictionary.apk" />
+  </artifact>
+</component>

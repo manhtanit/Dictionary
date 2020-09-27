@@ -1,10 +1,10 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.SortedMap;
 
 public class DictionaryCommandline {
 
     private DictionaryManagement engDic = new DictionaryManagement();
-
     public DictionaryCommandline() {
         engDic.insertFromFile();
     }
@@ -96,7 +96,7 @@ public class DictionaryCommandline {
                 break;
             }
         }
-        return hintWords;
+        return new ArrayList<String>(hintWords);
     }
 
 }
