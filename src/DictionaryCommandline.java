@@ -63,7 +63,7 @@ public class DictionaryCommandline {
         boolean check = false;
         boolean found = false;
         ArrayList<String> hintWords = new ArrayList<String>();
-        for (String c: engDic.dictionary1.dic.keySet()) {
+        for (String c: runAppication.dictionary.keySet()) {
             if (c.startsWith(s)) {
                 hintWords.add(c);
                 check = true;
@@ -84,7 +84,7 @@ public class DictionaryCommandline {
         boolean check = false;
         boolean found = false;
         ArrayList<String> hintWords = new ArrayList<String>();
-        for (String c: engDic.dictionary1.dic.keySet()) {
+        for (String c: runAppication.dictionary.keySet()) {
             if (c.startsWith(s)) {
                 hintWords.add(c);
                 check = true;

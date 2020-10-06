@@ -15,6 +15,7 @@ public class ExplainArea {
         explain.setLayout(null);
         return explain;
     }
+
     public JScrollPane scrollPaneFromTextArea(JTextArea explainFinal) {
         JScrollPane scrollPane = new JScrollPane(explainFinal);
         scrollPane.setPreferredSize(new Dimension(500,420));
@@ -23,4 +24,5 @@ public class ExplainArea {
         scrollPane.getViewport().setBackground(new Color(243,220,150));
         return scrollPane;
     }
+    
 }

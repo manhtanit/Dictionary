@@ -10,21 +10,23 @@ public class runAppication extends JFrame implements KeyListener, MouseListener 
     private String target = "";
     private String explain = "";
     private int length=10;
-    private SortedMap<String, String> dictionary =  (new Dictionary()).getDictionary();
-
-    private BackGround backGround = new BackGround();
-    private Search search = new Search();
-    private JTextField searchField = search.searchBox1();
-    private JButton searchButton = search.searchButton1();
-    private DictionaryCommandline commandlineInput = new DictionaryCommandline();
-    private HintWord testHint = new HintWord();
-    private JLabel[] hints = new JLabel[10];
-    private ExplainArea explainArea = new ExplainArea();
-    private JTextArea explainFinal = explainArea.explainArea("");
-    private JMenuBar menuBar = (new Menu()).menu();
-    JScrollPane scrollPane = explainArea.scrollPaneFromTextArea(explainFinal);
     private ArrayList<String> hintWords = new ArrayList<String>();
+    static SortedMap<String, String> dictionary =  (new Dictionary()).getDictionary();
+    static String historySearch = "Target: \n";
 
+    BackGround backGround = new BackGround();
+    Search search = new Search();
+    JTextField searchField = search.searchBox1();
+    JButton searchButton = search.searchButton1();
+    DictionaryCommandline commandlineInput = new DictionaryCommandline();
+    HintWord testHint = new HintWord();
+    JLabel[] hints = new JLabel[10];
+    ExplainArea explainArea = new ExplainArea();
+    JTextArea explainFinal = explainArea.explainArea("");
+    Menu menu = new Menu(dictionary);
+    JMenuBar menuBar = menu.menu();
+    JScrollPane scrollPane = explainArea.scrollPaneFromTextArea(explainFinal);
+    Editing editing = new Editing(dictionary);
 
     public runAppication() {
         this.basicAppicationSetting();
@@ -69,7 +71,7 @@ public class runAppication extends JFrame implements KeyListener, MouseListener 
         for (int i=0; i<length; i++) {
             hints[i].addMouseListener(this);
         }
-        for (int i=0; i<3; i++) {
+        for (int i=0; i<4; i++) {
             menuBar.getMenu(0).getItem(i).addMouseListener(this);
         }
     }
@@ -125,10 +127,13 @@ public class runAppication extends JFrame implements KeyListener, MouseListener 
                 explain = dictionary.get(hints[i].getText());
                 explainFinal.setText(explain);
                 searchField.setText(hints[i].getText());
+                historySearch = historySearch +"    + "+ hints[i].getText() + "\n";
             }
         }
-        if (e.getSource() == menuBar.getMenu(0).getItem(2)) {
-            System.out.println("Replace");
+        for (int i=0; i<4; i++) {
+            if (e.getSource() == menuBar.getMenu(0).getItem(i)) {
+                editing.handleEvent(i);
+            }
         }
     }
 
